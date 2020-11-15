@@ -9,6 +9,11 @@ const double buttonHeight = 80.0;
 const Color activeCardColour = Color(0xFF1D1E33);
 const Color inactiveCardColour = Color(0xFF111328);
 const Color containerColour = Color(0xFFEB1555);
+const TextStyle kNumberTextStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.w900,
+
+);
 
 enum Gender {
   Male,
@@ -25,6 +30,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   Gender selectedGender;
+  int height = 80;
 
 
   @override
@@ -34,6 +40,7 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               child: Row(
@@ -76,10 +83,45 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: reusableCard(
                     colour: activeCardColour,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'HEIGHT', style: TextStyle(fontSize: 18.0, color: Color(0xFF8D8E98),),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: <Widget>[
+                            Text(
+                              height.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            Text(
+                              'cm',
+                              style: TextStyle(fontSize: 18.0, color: Color(0xFF8D8E98),),
+                            )
+                          ],
+                        ),
+                        Slider(
+                          value: height.toDouble(),
+                          min: 120.0,
+                          max: 220.0,
+                          activeColor: Color(0xFFEB1555),
+                          inactiveColor: Color(0xFF8D8E98),
+                          onChanged: (double newValue){
+                            setState(() {
+                              height = newValue.round();
+                            });
+                          },
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
-            )),
+            ),),
             Expanded(
               child: Row(
                 children: <Widget>[
