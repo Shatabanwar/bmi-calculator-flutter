@@ -1,6 +1,9 @@
+import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'icon_widget.dart';
 
 const double buttonHeight = 80.0;
 const Color activeCardColour = Color(0xFF1D1E33);
@@ -104,50 +107,6 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class CardChildWidget extends StatelessWidget {
-  final IconData cardIcon;
-  final String cardText;
 
-  CardChildWidget({this.cardIcon, this.cardText});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          cardIcon,
-          size: 80.0,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          cardText,
-          style: TextStyle(fontSize: 18.0, color: Color(0xFF8D8E98)),
-        )
-      ],
-    );
-  }
-}
 
-class reusableCard extends StatelessWidget {
-  final Color colour;
-  final Widget cardChild;
-  Function function;
-
-  reusableCard({@required this.colour, this.cardChild,this.function});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: function ,
-      child: Container(
-        child: cardChild,
-        margin: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-            color: colour, borderRadius: BorderRadius.circular(10.0)),
-      ),
-    );
-  }
-}
