@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'icon_widget.dart';
+import 'calculator_brain.dart';
 
 const double buttonHeight = 80.0;
 const Color activeCardColour = Color(0xFF1D1E33);
@@ -41,6 +42,7 @@ class _InputPageState extends State<InputPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('BMI CALCULATOR'),
+          centerTitle: true,
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -234,7 +236,14 @@ class _InputPageState extends State<InputPage> {
             ),
             BottomButton(
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => OutputPage()));
+
+                CalculatorBrain calc = CalculatorBrain(height: height,weight: weight);
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OutputPage(
+                  bmi: calc.calculateBMI(),
+                  resultText: calc.getResults(),
+                  interpretation: calc.getInterpretation(),
+                )));
               },
               text:Text('CALCULATE BMI'
                 ,
