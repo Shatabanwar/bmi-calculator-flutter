@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/output_page.dart';
 import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   Gender selectedGender;
-  int height = 80;
+  int height = 180;
   int weight = 60;
   int age = 19;
 
@@ -231,14 +232,45 @@ class _InputPageState extends State<InputPage> {
                 ],
               ),
             ),
-            Container(
-              height: buttonHeight,
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 10.0),
-              color: containerColour,
+            BottomButton(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => OutputPage()));
+              },
+              text:Text('CALCULATE BMI'
+                ,
+                style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                ),
+              textAlign: TextAlign.center,),
             ),
           ],
         ));
+  }
+}
+
+class BottomButton extends StatelessWidget {
+
+  BottomButton({@required this.onTap,@required this.text});
+
+  final Function onTap;
+  final Widget text;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Center(
+        child: Container(
+          child:text,
+          height: buttonHeight,
+          width: double.infinity,
+          margin: EdgeInsets.only(top: 10.0),
+          padding: EdgeInsets.only(bottom: 20.0),
+          color: containerColour,
+        ),
+      ),
+    );
   }
 }
 
